@@ -1,6 +1,6 @@
-category,metric,value,unit
-benefit_cap,Households affected,233.0,k
-benefit_cap,Total annual reduction,603.0,£m
-benefit_cap,Average monthly loss,215.0,£
-self_employment,Self-employed on UC,0.25,m
-carers,Carers on UC,0.53,m
+category,metric,description,value,unit,year
+benefit_cap,Households capped,Number of households whose UC is reduced by the benefit cap (limits total benefits a household can receive),325.0,k,2026
+benefit_cap,Total cap reduction,Annual amount cut from household benefits due to the benefit cap,941.0,£m,2026
+benefit_cap,Avg monthly cap loss,Average monthly reduction for capped households,241.0,£,2026
+self_employment,Self-employed on UC,Number of self-employed individuals receiving Universal Credit,0.28,m,2026
+carers,Carers on UC,Number of carers (eligible for Carer's Allowance) receiving Universal Credit,0.53,m,2026
