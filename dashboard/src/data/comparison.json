@@ -57,20 +57,20 @@
     {
       "metric": "UC childcare recipients",
       "rf_value": 190,
-      "pe_value": 500,
-      "diff": 310,
+      "pe_value": 188,
+      "diff": -2,
       "unit": "k",
-      "status": "moderate_diff",
-      "explanation": "PE shows entitlement (500k eligible UC recipients with childcare); RF shows actual claims (190k). Take-up rate is ~38%. Remaining gap due to entitlement vs receipt."
+      "status": "close_match",
+      "explanation": "RF counts families with substantial claims (>£190/mo). PE with same threshold = 188k, matching RF. PE total (any amount) = 500k."
     },
     {
       "metric": "Avg monthly childcare element",
       "rf_value": 420,
-      "pe_value": 244,
-      "diff": -176,
+      "pe_value": 531,
+      "diff": 111,
       "unit": "£",
       "status": "moderate_diff",
-      "explanation": "RF average is higher because only those who actively claim (often with higher costs) are included. PE includes all entitled families."
+      "explanation": "PE average for substantial claimants (>£190/mo) is £531. Difference may be due to FRS data vs DWP admin data."
     },
     {
       "metric": "Workers with METR > 70%",
