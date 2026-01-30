@@ -29,60 +29,71 @@ function parseCSV(text) {
 
 function StatusBadge({ status }) {
   const colors = {
-    close_match: { bg: '#dcfce7', text: '#166534', label: 'Close Match' },
-    moderate_diff: { bg: '#fef3c7', text: '#92400e', label: 'Moderate Diff' },
-    large_discrepancy: { bg: '#fee2e2', text: '#991b1b', label: 'Large Gap' }
+    close_match: { bg: '#dcfce7', text: '#166534', label: '✓' },
+    moderate_diff: { bg: '#fef3c7', text: '#92400e', label: '~' },
+    large_discrepancy: { bg: '#fee2e2', text: '#991b1b', label: '!' }
   }
   const { bg, text, label } = colors[status] || colors.moderate_diff
   return (
-    <span style={{ backgroundColor: bg, color: text, padding: '2px 8px', borderRadius: '12px', fontSize: '12px', fontWeight: 500 }}>
+    <span style={{ backgroundColor: bg, color: text, padding: '2px 8px', borderRadius: '8px', fontSize: '14px', fontWeight: 600 }}>
       {label}
     </span>
   )
 }
 
-function ComparisonCard({ data }) {
-  const [expanded, setExpanded] = useState(false)
-  const unit = data.rf_unit
-  const diffDisplay = unit === '£' || unit === 'bn'
-    ? `${data.diff_value >= 0 ? '+' : ''}${unit === '£' ? '£' : ''}${data.diff_value}${unit === 'bn' ? 'bn' : ''}`
-    : unit === '%'
-    ? `${data.diff_value >= 0 ? '+' : ''}${data.diff_value}pp`
-    : `${data.diff_value >= 0 ? '+' : ''}${data.diff_value}${unit}`
+function formatValue(val, unit, pct) {
+  let str = ''
+  if (unit === '£') str = `£${val.toLocaleString()}`
+  else if (unit === 'bn') str = `£${val}bn`
+  else if (unit === '%') str = `${val}%`
+  else if (unit === 'k') str = `${val.toLocaleString()}k`
+  else if (unit === 'm') str = `${val}m`
+  else str = `${val}${unit}`
 
-  const formatValue = (val, u) => {
-    if (u === '£') return `£${val}`
-    if (u === 'bn') return `£${val}bn`
-    if (u === '%') return `${val}%`
-    return `${val}${u}`
+  if (pct !== null && pct !== undefined) {
+    str += ` (${pct}%)`
   }
+  return str
+}
 
+function formatDiff(val, unit) {
+  const sign = val >= 0 ? '+' : ''
+  if (unit === '£') return `${sign}£${val}`
+  if (unit === 'bn') return `${sign}£${val}bn`
+  if (unit === '%') return `${sign}${val}pp`
+  if (unit === 'k') return `${sign}${val}k`
+  if (unit === 'm') return `${sign}${val}m`
+  return `${sign}${val}${unit}`
+}
+
+function ComparisonTable({ data, title }) {
   return (
-    <div className="comparison-card" onClick={() => data.note && setExpanded(!expanded)}>
-      <div className="card-header">
-        <h3>{data.metric}</h3>
-        <StatusBadge status={data.status} />
-      </div>
-      <div className="card-values">
-        <div className="value-box rf">
-          <span className="label">RF</span>
-          <span className="value">{formatValue(data.rf_value, unit)}</span>
-        </div>
-        <div className="value-box pe">
-          <span className="label">PE</span>
-          <span className="value">{formatValue(data.pe_value, unit)}</span>
-        </div>
-        <div className="value-box diff">
-          <span className="label">Diff</span>
-          <span className={`value ${data.diff_value >= 0 ? 'positive' : 'negative'}`}>{diffDisplay}</span>
-        </div>
-      </div>
-      {data.note && (
-        <div className={`explanation ${expanded ? 'expanded' : ''}`}>
-          {expanded && <p>{data.note}</p>}
-          <span className="expand-hint">{expanded ? '▲ Less' : '▼ Click for details'}</span>
-        </div>
-      )}
+    <div className="comparison-table-container">
+      <table className="comparison-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Resolution Foundation</th>
+            <th>PolicyEngine</th>
+            <th>Difference</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((row, i) => (
+            <tr key={i} className={row.status}>
+              <td className="metric-name">{row.metric}</td>
+              <td className="rf-value">{formatValue(row.rf_value, row.rf_unit, row.rf_pct)}</td>
+              <td className="pe-value">{formatValue(row.pe_value, row.pe_unit, row.pe_pct)}</td>
+              <td className={`diff-value ${row.diff_value >= 0 ? 'positive' : 'negative'}`}>
+                {formatDiff(row.diff_value, row.rf_unit)}
+                {row.diff_pct !== null && row.diff_pct !== undefined && ` (${row.diff_pct >= 0 ? '+' : ''}${row.diff_pct}pp)`}
+              </td>
+              <td className="status-cell"><StatusBadge status={row.status} /></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }
@@ -148,9 +159,6 @@ function App() {
   if (loading) return <div className="loading">Loading data...</div>
   if (error) return <div className="error">Error loading data: {error}</div>
 
-  const coreStats = comparison.filter(c => c.category === 'core')
-  const additionalStats = comparison.filter(c => c.category === 'additional')
-
   const benefitCap = policyImpacts.filter(p => p.category === 'benefit_cap')
   const selfEmp = policyImpacts.find(p => p.category === 'self_employment')
   const carers = policyImpacts.find(p => p.category === 'carers')
@@ -171,43 +179,12 @@ function App() {
 
       <main>
         <section className="section">
-          <h2>Core Statistics</h2>
-          <div className="stats-grid">
-            {coreStats.map((stat, i) => (
-              <div key={i} className="stat-card">
-                <h3>{stat.metric}</h3>
-                <div className="stat-comparison">
-                  <div className="stat-col">
-                    <span className="stat-label">Resolution Foundation</span>
-                    <span className="stat-value rf">
-                      {stat.rf_unit === 'bn' ? '£' : ''}{stat.rf_value}{stat.rf_unit === 'bn' ? 'bn' : stat.rf_unit}
-                      {stat.rf_pct ? ` (${stat.rf_pct}%)` : ''}
-                    </span>
-                  </div>
-                  <div className="stat-col">
-                    <span className="stat-label">PolicyEngine</span>
-                    <span className="stat-value pe">
-                      {stat.pe_unit === 'bn' ? '£' : ''}{stat.pe_value}{stat.pe_unit === 'bn' ? 'bn' : stat.pe_unit}
-                      {stat.pe_pct ? ` (${stat.pe_pct}%)` : ''}
-                    </span>
-                  </div>
-                </div>
-                <div className="stat-diff">
-                  {stat.diff_value >= 0 ? '+' : ''}{stat.diff_value}{stat.rf_unit}
-                  {stat.diff_pct !== null ? ` (${stat.diff_pct >= 0 ? '+' : ''}${stat.diff_pct}pp)` : ''}
-                </div>
-                {stat.note && <p className="stat-note">{stat.note}</p>}
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="section">
-          <h2>Additional Comparisons</h2>
-          <div className="comparison-grid">
-            {additionalStats.map((comp, i) => (
-              <ComparisonCard key={i} data={comp} />
-            ))}
+          <h2>RF vs PolicyEngine Comparison</h2>
+          <ComparisonTable data={comparison} />
+          <div className="table-legend">
+            <span><StatusBadge status="close_match" /> Close match</span>
+            <span><StatusBadge status="moderate_diff" /> Moderate difference</span>
+            <span><StatusBadge status="large_discrepancy" /> Large gap</span>
           </div>
         </section>
 
