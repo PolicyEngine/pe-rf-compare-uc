@@ -1,9 +1,9 @@
-category,metric,description,rf_value,rf_unit,rf_year,rf_pct,pe_value,pe_unit,pe_year,pe_pct,diff_value,diff_pct,status,note
-core,Working-age adults in UC,Number of people aged 16-64 living in households receiving Universal Credit,8.5,m,2026,26.0,8.3,m,2026,19.0,-0.2,-7.0,close_match,
-core,Children in UC households,Number of children under 16 living in households receiving Universal Credit,6.5,m,2026,54.0,5.3,m,2026,41.9,-1.2,-12.1,moderate_diff,
-core,Annual UC expenditure,Total government spending on Universal Credit per year,86.0,bn,2029,,90.8,bn,2029,,4.8,,close_match,
-additional,Average monthly UC award,Mean Universal Credit payment per benefit unit per month,1030.0,£,2026,,1082.0,£,2026,,52.0,5.1,close_match,
-additional,UC families with children,Percentage of UC claimant families that have dependent children,46.0,%,2026,,49.3,%,2026,,3.3,,close_match,
-additional,UC childcare recipients,Families receiving substantial childcare support (>£190/month) through UC,190.0,k,2026,,189.0,k,2026,,-1.0,,close_match,
-additional,Avg monthly childcare element,Average monthly childcare element payment for those receiving substantial support,420.0,£,2026,,544.0,£,2026,,124.0,,large_discrepancy,
-additional,Workers with METR > 70%,Share of workers facing marginal effective tax rates above 70% (lose >70p per extra £1 earned),3.0,%,2026,,1.1,%,2026,,-1.9,,large_discrepancy,
+category,metric,rf_value,rf_unit,rf_pct,pe_value,pe_unit,pe_pct,diff_value,diff_pct,status,note
+core,Working-age adults in UC,8.5,m,26.0,8.2,m,18.8,-0.3,-7.2,moderate_diff,RF projects April 2026; PE shows 2025 entitlement
+core,Children in UC households,6.5,m,54.0,5.2,m,41.1,-1.3,-12.9,moderate_diff,PE uses children under 16
+core,Annual UC expenditure,86.0,bn,,80.3,bn,,-5.7,,moderate_diff,RF is 2029-30; PE is 2025
+additional,Average monthly UC award,1030.0,£,,1047.0,£,,17.0,1.7,close_match,
+additional,UC families with children,46.0,%,,49.2,%,,3.2,,close_match,
+additional,UC childcare recipients,190.0,k,,188.0,k,,-2.0,,close_match,PE filtered to >£190/mo to match RF methodology. PE total (any amount) = 500k
+additional,Avg monthly childcare element,420.0,£,,531.0,£,,111.0,,moderate_diff,PE avg for substantial claimants (>£190/mo)
+additional,Workers with METR > 70%,3.0,%,,1.1,%,,-1.9,,moderate_diff,

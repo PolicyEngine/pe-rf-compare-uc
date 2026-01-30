@@ -1,7 +1,7 @@
-element,expenditure_bn,pct_gross,year
-Standard Allowance,45.7,54.6,2026
-Housing Costs,19.9,23.7,2026
-Child Element,10.9,13.0,2026
-Disability Elements,5.3,6.3,2026
-Childcare Element,1.6,1.9,2026
-Carer Element,0.5,0.6,2026
+element,expenditure_bn,pct_gross
+Standard Allowance,223.6,66.2
+Child Element,48.4,14.3
+Housing Costs,97.3,28.8
+Childcare Element,7.8,2.3
+Disability Elements,27.3,8.1
+Carer Element,2.5,0.7
