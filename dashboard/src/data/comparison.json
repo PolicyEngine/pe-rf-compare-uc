@@ -1,0 +1,105 @@
+{
+  "metadata": {
+    "generated": "2026-01-30",
+    "policyengine_version": "2.45.4",
+    "rf_report": "Listen and Learn (January 2026)",
+    "pe_year": 2025
+  },
+  "core_statistics": [
+    {
+      "metric": "Working-age adults in UC",
+      "rf_value": "8.5m",
+      "rf_pct": 26.0,
+      "pe_value": "8.2m",
+      "pe_pct": 18.8,
+      "diff_value": "-0.3m",
+      "diff_pct": -7.2,
+      "note": "RF projects April 2026; PE shows 2025 entitlement"
+    },
+    {
+      "metric": "Children in UC households",
+      "rf_value": "6.5m",
+      "rf_pct": 54.0,
+      "pe_value": "5.2m",
+      "pe_pct": 41.1,
+      "diff_value": "-1.3m",
+      "diff_pct": -12.9,
+      "note": "PE uses children under 16; RF may use different definition"
+    },
+    {
+      "metric": "Annual UC expenditure",
+      "rf_value": "£86.0bn",
+      "rf_year": "2029-30",
+      "pe_value": "£80.3bn",
+      "pe_year": "2025",
+      "diff_value": "£-5.7bn",
+      "note": "Different projection years"
+    }
+  ],
+  "additional_comparisons": [
+    {
+      "metric": "Average monthly UC award",
+      "rf_value": 1030,
+      "pe_value": 1047,
+      "diff": 17,
+      "diff_pct": 1.7,
+      "unit": "£",
+      "status": "close_match"
+    },
+    {
+      "metric": "UC families with children",
+      "rf_value": 46.0,
+      "pe_value": 49.2,
+      "diff": 3.2,
+      "unit": "%",
+      "status": "close_match"
+    },
+    {
+      "metric": "UC childcare recipients",
+      "rf_value": 190,
+      "pe_value": 1825,
+      "diff": 1635,
+      "unit": "k",
+      "status": "large_discrepancy",
+      "explanation": "PE shows entitlement (~1.8m eligible); RF shows actual claims (~190k). Take-up rate is approximately 10%. This reflects low awareness and complex claiming process for UC childcare element."
+    },
+    {
+      "metric": "Avg monthly childcare element",
+      "rf_value": 420,
+      "pe_value": 356,
+      "diff": -64,
+      "unit": "£",
+      "status": "moderate_diff",
+      "explanation": "PE includes smaller entitlements from broader eligible population"
+    },
+    {
+      "metric": "Workers with METR > 70%",
+      "rf_value": 3.0,
+      "pe_value": 1.1,
+      "diff": -1.9,
+      "unit": "%",
+      "status": "moderate_diff"
+    }
+  ],
+  "uc_elements": [
+    { "element": "Standard Allowance", "expenditure_bn": 223.6, "pct_gross": 66.2 },
+    { "element": "Housing Costs", "expenditure_bn": 97.3, "pct_gross": 28.8 },
+    { "element": "Child Element", "expenditure_bn": 48.4, "pct_gross": 14.3 },
+    { "element": "Disability Elements", "expenditure_bn": 27.3, "pct_gross": 8.1 },
+    { "element": "Childcare Element", "expenditure_bn": 7.8, "pct_gross": 2.3 },
+    { "element": "Carer Element", "expenditure_bn": 2.5, "pct_gross": 0.7 }
+  ],
+  "policy_impacts": {
+    "benefit_cap": {
+      "households_affected": 233000,
+      "total_reduction_m": 603,
+      "avg_annual_loss": 2584,
+      "avg_monthly_loss": 215
+    },
+    "self_employment": {
+      "total_self_employed_m": 4.88,
+      "self_employed_uc_m": 0.25
+    },
+    "carers_on_uc_m": 0.53
+  }
+}
