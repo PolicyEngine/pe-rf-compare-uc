@@ -1,7 +1,7 @@
 {
   "metadata": {
     "generated": "2026-01-30",
-    "policyengine_version": "2.45.4",
+    "policyengine_version": "2.72.2",
     "rf_report": "Listen and Learn (January 2026)",
     "pe_year": 2025
   },
@@ -57,20 +57,20 @@
     {
       "metric": "UC childcare recipients",
       "rf_value": 190,
-      "pe_value": 1825,
-      "diff": 1635,
+      "pe_value": 500,
+      "diff": 310,
       "unit": "k",
-      "status": "large_discrepancy",
-      "explanation": "PE shows entitlement (~1.8m eligible); RF shows actual claims (~190k). Take-up rate is approximately 10%. This reflects low awareness and complex claiming process for UC childcare element."
+      "status": "moderate_diff",
+      "explanation": "PE shows entitlement (500k eligible UC recipients with childcare); RF shows actual claims (190k). Take-up rate is ~38%. Remaining gap due to entitlement vs receipt."
     },
     {
       "metric": "Avg monthly childcare element",
       "rf_value": 420,
-      "pe_value": 356,
-      "diff": -64,
+      "pe_value": 244,
+      "diff": -176,
       "unit": "£",
       "status": "moderate_diff",
-      "explanation": "PE includes smaller entitlements from broader eligible population"
+      "explanation": "RF average is higher because only those who actively claim (often with higher costs) are included. PE includes all entitled families."
     },
     {
       "metric": "Workers with METR > 70%",
@@ -86,7 +86,7 @@
     { "element": "Housing Costs", "expenditure_bn": 97.3, "pct_gross": 28.8 },
     { "element": "Child Element", "expenditure_bn": 48.4, "pct_gross": 14.3 },
     { "element": "Disability Elements", "expenditure_bn": 27.3, "pct_gross": 8.1 },
-    { "element": "Childcare Element", "expenditure_bn": 7.8, "pct_gross": 2.3 },
+    { "element": "Childcare Element", "expenditure_bn": 1.5, "pct_gross": 0.4 },
     { "element": "Carer Element", "expenditure_bn": 2.5, "pct_gross": 0.7 }
   ],
   "policy_impacts": {

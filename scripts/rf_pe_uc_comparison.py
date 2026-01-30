@@ -204,8 +204,11 @@ print("=" * 70)
 
 try:
     uc_childcare = sim.calculate("uc_childcare_element", period=YEAR, map_to="benunit")
-    childcare_recipients = (uc_childcare > 0).sum()
-    total_childcare_spend = uc_childcare.sum()
+    # BUG FIX: Only count those BOTH receiving UC AND getting childcare element
+    # Previously counted all with childcare element (including non-UC recipients)
+    childcare_recipients = ((benunit_uc > 0) & (uc_childcare > 0)).sum()
+    # Only sum childcare for actual UC recipients
+    total_childcare_spend = (uc_childcare * (benunit_uc > 0)).sum()
     avg_childcare = total_childcare_spend / childcare_recipients if childcare_recipients > 0 else 0
 
     print(f"Benefit units receiving UC childcare: {childcare_recipients/1e3:.0f} thousand")
