@@ -1,5 +1,6 @@
+'use client'
+
 import { useState, useEffect } from 'react'
-import './App.css'
 
 function parseCSV(text) {
   const lines = text.trim().split('\n')
